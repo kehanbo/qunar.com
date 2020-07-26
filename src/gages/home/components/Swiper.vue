@@ -1,36 +1,59 @@
 <template>
-<div class="wrapper">
- <swiper :options="swiperOption">
-    <!-- slides -->
-    <swiper-slide>
-      <img src="http://img1.qunarzz.com/piao/fusion/1802/51/e78f936a5b404102.jpg_640x200_c14f0b3a.jpg" alt="">
-    </swiper-slide>
-    <swiper-slide>
-       <img src="http://img1.qunarzz.com/piao/fusion/1802/42/7c92b9a381e46402.jpg_640x200_1cdce2a4.jpg" alt="">
-    </swiper-slide>
-    <!-- Optional controls -->
-    <div class="swiper-pagination"  slot="pagination"></div>
-  </swiper>
-</div>
+  <div class="wrapper">
+    <!-- 这里增加一个wrapper来包裹着轮播图,然后设置一个高度,解决图片还没加载出来时,高度为0的问题 -->
+    <swiper :options="swiperOption">
+      <swiper-slide v-for="item of swiperList" :key="item.id">
+        <img
+          class="swiper-img"
+          :src="item.imgUrl"
+        />
+      </swiper-slide>
+      
+      <!-- Optional controls -->
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
+  </div>
 </template>
 
 <script>
 export default {
-    name:"HomeSwiper",
-    data () {
-      return {
-        swiperOption : {}
-      }
-    }
-}
+  name: "HomeSwiper",
+  data() {
+    return {
+      swiperOption: {
+         // swiper有一个方法,就是用来显示轮播图小点的方法,将上面小点的类名传进去
+         pagination:'.swiper-pagination',
+         //这里加上一个loop,让插件支持图片轮播
+         loop:true
+      },
+      swiperList:[{
+        id:'001',
+        imgUrl:'http://img1.qunarzz.com/piao/fusion/1802/51/e78f936a5b404102.jpg_640x200_c14f0b3a.jpg'
+      },{
+        id:'002',
+        imgUrl:'http://img1.qunarzz.com/piao/fusion/1802/42/7c92b9a381e46402.jpg_640x200_1cdce2a4.jpg'
+      }]
+    
+    };
+  },
+};
 </script>
 
 <style lang='stylus' scoped>
-  .wrapper
-    width: 100%
-    height: 0
-    padding-bottom: 31.25%
-    background: #eee
-    .swiper-img
-      width: 100%
+  //三个箭头表示样式的穿透
+  .wrapper >>> .swiper-pagination-bullet-active
+    background-color #fff
+  .wrapper {
+    // --------记住中间部分的写法,自适应宽高比的标准写法---------------
+    width 100%
+    height 0
+    overflow hidden
+    padding-bottom 31.25%
+    // -------------------------------------------------------------
+    background: #eee;
+
+    .swiper-img {
+      width: 100%;
+    }
+  }
 </style>
