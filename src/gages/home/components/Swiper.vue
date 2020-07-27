@@ -18,6 +18,9 @@
 <script>
 export default {
   name: "HomeSwiper",
+  props:{
+    swiperList:Array
+  },
   data() {
     return {
       swiperOption: {
@@ -26,13 +29,6 @@ export default {
          //这里加上一个loop,让插件支持图片轮播
          loop:true
       },
-      swiperList:[{
-        id:'001',
-        imgUrl:'http://img1.qunarzz.com/piao/fusion/1802/51/e78f936a5b404102.jpg_640x200_c14f0b3a.jpg'
-      },{
-        id:'002',
-        imgUrl:'http://img1.qunarzz.com/piao/fusion/1802/42/7c92b9a381e46402.jpg_640x200_1cdce2a4.jpg'
-      }]
     
     };
   },

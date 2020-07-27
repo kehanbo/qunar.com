@@ -7,10 +7,13 @@
       <span class="iconfont">&#xe67d;</span>
       输入城市/景点/主题
     </div>
-    <div class="headerRight">
-      城市
-      <span class="iconfont icRight">&#xe688;</span>
-    </div>
+    <!-- 使用这个路由的属性可以跳转到指定的路径 -->
+    <router-link to="/city">
+      <div class="headerRight">
+        城市
+        <span class="iconfont icRight">&#xe688;</span>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -38,6 +41,7 @@
       text-align :center
       font-size .24rem
       padding-left :.02rem
+      color #fff
       .icRight
         margin-left:-.04rem
         font-size :.024rem
