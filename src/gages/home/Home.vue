@@ -9,11 +9,11 @@
 </template>
 
 <script>
-  import HomeHeader from './components/header'
-  import HomeSwiper from './components/swiper'
-  import HomeIcons from './components/icons'
-  import HomeHotcomment from './components/hotcomment'
-  import HomeWeekend from './components/weekend'
+  import HomeHeader from './components/HomeHeader'
+  import HomeSwiper from './components/HomeSwiper'
+  import HomeIcons from './components/HomeIcons'
+  import HomeHotcomment from './components/HomeHotcomment'
+  import HomeWeekend from './components/HomeWeekend'
   //这里引入vue的ajax请求插件
   import axios from 'axios'
   export default {
