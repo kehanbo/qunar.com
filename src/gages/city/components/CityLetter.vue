@@ -1,18 +1,36 @@
 <template>
     <div class="list">
         <div class="font" 
-        v-for="(item,key) of cities" 
-        :key="key"
+        v-for="item of letters" 
+        :key="item"
+        :ref="item"
         @click="handlaClick"
-        >{{key}}</div>
+        @touchstart="handleStart"
+        @touchmove="handleMove"
+        @touchend="handleEnd"
+        >{{item}}</div>
     </div>
 </template>
 
 <script>
 export default {
     name:'CityLetter',
-    props:{
+     props:{
         cities:Object
+    },
+    data(){
+        return {
+            touchStart:false
+        }
+    },
+    computed:{
+        letters(){
+            const letters = []
+            for ( let i in this.cities) {
+                letters.push(i)
+            }
+            return letters
+        }
     },
     methods:{
         handlaClick(e){
@@ -20,6 +38,22 @@ export default {
             //然后利用触发事件将该值传递出去
             //在父组件中监听,然后再传给兄弟组件
             this.$emit("change",e.target.innerText)
+        },
+        handleStart(){
+            this.touchStart=true
+        },
+        handleMove(e){
+            if(this.touchStart){
+                const startY = this.$refs['A'][0].offsetTop
+                const touchY = e.touches[0].clientY -79
+                const index = Math.floor((touchY-startY)/20)
+                if(index >= 0 && index < this.letters.length){
+                      this.$emit("change",this.letters[index])
+                }             
+            }
+        },
+        handleEnd(){
+            this.touchStart=false
         }
     }
 }

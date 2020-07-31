@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div class="area" v-for="(city,key) of cities" :key="key">
+      <div class="area" v-for="(city,key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom" >{{key}}</div>
         <div class="font-list" v-for="item of city" :key="item.id">
           <div class="font border-bottom">{{item.name}}</div>
@@ -42,8 +42,13 @@ export default {
   },
   //这里通过监听由父组件传来的lett,若是lett发生改变,便执行对应的操作
   watch:{
-    lett(){
-      console.log(this.lett)
+    lett () {
+      //better-scroll提供了一个接口,可以直接跳转到对应的区域上
+      if (this.lett) {
+          var element = this.$refs[this.lett][0]
+          this.scroll.scrollToElement(element)
+      }
+      
     }
   }
 };
