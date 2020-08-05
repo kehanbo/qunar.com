@@ -10,7 +10,7 @@
     <!-- 使用这个路由的属性可以跳转到指定的路径 -->
     <router-link to="/city">
       <div class="headerRight">
-        城市
+        {{this.city}}
         <span class="iconfont icRight">&#xe688;</span>
       </div>
     </router-link>
@@ -18,8 +18,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
   export default {
-    name:'HomeHeader'
+    name:'HomeHeader',
+    computed:{
+      ...mapState(['city'])
+    }
   }
 </script>
 
@@ -37,7 +41,7 @@
         padding-left: .2rem
     .headerRight
       float :right
-      width :1.24rem
+      min-width :1.04rem
       text-align :center
       font-size .24rem
       padding-left :.02rem

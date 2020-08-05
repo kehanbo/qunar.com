@@ -5,21 +5,21 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrap">
-            <div class="button">北京</div>
+            <div class="button">{{this.currtenCity}}</div>
           </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrap" v-for="item of hotCities" :key="item.id">
+          <div class="button-wrap" v-for="item of hotCities" :key="item.id" @click="hanleClickbtn(item.name)">
             <div class="button">{{item.name}}</div>
           </div>
         </div>
       </div>
       <div class="area" v-for="(city,key) of cities" :key="key" :ref="key">
         <div class="title border-topbottom" >{{key}}</div>
-        <div class="font-list" v-for="item of city" :key="item.id">
+        <div class="font-list" v-for="item of city" :key="item.id" @click="hanleClickbtn(item.name)">
           <div class="font border-bottom">{{item.name}}</div>
         </div>
       </div>
@@ -30,6 +30,7 @@
 
 <script>
 import Bscroll from "better-scroll";
+import { mapState } from 'vuex';
 export default {
   props: {
     cities: Object,
@@ -37,8 +38,21 @@ export default {
     lett:String
   },
   name: "CityList",
+  computed:{
+    ...mapState({
+      currtenCity:'city'
+    })
+  },
+  methods:{
+    hanleClickbtn (city) {
+      // 通过vuex中的dispatch触发一个事件给actions,同时将参数传递过去
+      this.$store.dispatch("changecity",city)
+      //路由有一个功能可以跳转到其他页面,类似于js中的a标签
+      this.$router.push('/')
+    }
+  },
   mounted() {
-    this.scroll = new Bscroll(this.$refs.warpper);
+    this.scroll = new Bscroll(this.$refs.warpper,{click:true});
   },
   //这里通过监听由父组件传来的lett,若是lett发生改变,便执行对应的操作
   watch:{

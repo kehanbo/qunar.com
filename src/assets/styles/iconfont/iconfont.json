@@ -6,6 +6,13 @@
   "description": "my-project项目图标",
   "glyphs": [
     {
+      "icon_id": "10487568",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e69b",
+      "unicode_decimal": 59035
+    },
+    {
       "icon_id": "15838525",
       "name": "search",
       "font_class": "search",

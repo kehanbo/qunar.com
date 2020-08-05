@@ -1,8 +1,10 @@
 <template>
   <div class="header">
+    <router-link to="/">
     <div class="headerLeft">
       <div class="iconfont icLeft">&#xe685;</div>
     </div>
+    </router-link>
     城市列表
   </div>
 </template>
@@ -28,4 +30,5 @@
     float :left
     .icLeft
       padding-left: .2rem
+      color #fff
 </style>

@@ -3,16 +3,23 @@
     <div class="hotcomment-title">热烈推荐</div>
     <ul>
         <!-- border-bottom是项目一开始就引入的一像素边框 -->
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
-        <div class="item-img-wrapp">
-          <img :src="item.imgUrl" class="item-img" />
-        </div>
-        <div class="item-info">
-          <p class="item-title">{{item.title}}</p>
-          <p class="item-desc">{{item.desc}}</p>
-          <button class="item-button">查看详情</button>
-        </div>
-      </li>
+      
+          <router-link 
+          tag="li" 
+          class="item border-bottom" 
+          v-for="item of recommendList" 
+          :key="item.id"
+          :to="'/Detail/'+item.id">
+            <div class="item-img-wrapp">
+              <img :src="item.imgUrl" class="item-img" />
+            </div>
+            <div class="item-info">
+              <p class="item-title">{{item.title}}</p>
+              <p class="item-desc">{{item.desc}}</p>
+              <button class="item-button">查看详情</button>
+            </div>
+          </router-link>
+      
     </ul>
   </div>
 </template>

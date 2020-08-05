@@ -14,6 +14,7 @@
   import HomeIcons from './components/HomeIcons'
   import HomeHotcomment from './components/HomeHotcomment'
   import HomeWeekend from './components/HomeWeekend'
+  import { mapState } from 'vuex'
   //这里引入vue的ajax请求插件
   import axios from 'axios'
   export default {
@@ -30,12 +31,16 @@
             iconList:[],
             swiperList:[],
             recommendList:[],
-            weekendList:[]
+            weekendList:[],
+            lastCity:''
         }
+      },
+      computed:{
+        ...mapState(['city'])
       },
       methods:{
         getHomeInfo () {
-          axios.get('/api/index.json')
+          axios.get('/api/index.json?city='+this.city)
           .then(this.getHomeInfoSucc)
         },
         getHomeInfoSucc (res) {
@@ -52,7 +57,15 @@
     //利用mounted这个生命周期函数来执行ajax请求
     mounted () {
       //当页面挂载好了之后,执行ajax请求
+      this.lastCity = this.city
       this.getHomeInfo()
+    },
+    // 这里的activate的生命周期函数是组件被keep-alive包裹后才会生成的,因此可以使用这个函数来发送ajax请求
+    activated () {
+      if(this.lastCity !== this.city){
+        this.lastCity = this.city
+        this.getHomeInfo()
+      } 
     }
   }
 </script>
